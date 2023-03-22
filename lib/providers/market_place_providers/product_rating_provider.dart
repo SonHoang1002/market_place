@@ -1,0 +1,23 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:market_place/apis/market_place_apis/product_rating_apis.dart';
+
+class ProductRatingState {
+  List<dynamic> ratingDetailList;
+  ProductRatingState({this.ratingDetailList = const []});
+  ProductRatingState copyWith(List<dynamic> list) {
+    return ProductRatingState(ratingDetailList: list);
+  }
+}
+
+final ratingDetailProvider =
+    StateNotifierProvider<ProductRatingController, ProductRatingState>(
+        (ref) => ProductRatingController());
+
+class ProductRatingController extends StateNotifier<ProductRatingState> {
+  ProductRatingController() : super(ProductRatingState());
+
+  getProductRatingDetailList(dynamic id) async {
+    final response = await ProductRatingApis().getDeliveryAddressApi(id);
+    state = state.copyWith(response);
+  }
+}
