@@ -131,7 +131,6 @@ class _FilterCategoriesPageState extends ConsumerState<FilterCategoriesPage> {
                                             context,
                                             childCategoriesList?[index]["text"]
                                                 as String,
-                                                
                                             childCategoriesList![index]
                                                             ["icon"] !=
                                                         null &&
@@ -141,8 +140,7 @@ class _FilterCategoriesPageState extends ConsumerState<FilterCategoriesPage> {
                                                 ? childCategoriesList![index]
                                                     ["icon"]
                                                 : "https://media.emso.vn/sn/Category%20MKP/ThoiTrangNu.png",
-                                                titleSize: 10,
-                                            function: () {
+                                            titleSize: 10, function: () {
                                           pushAndReplaceToNextScreen(
                                               context,
                                               CategorySearchPage(

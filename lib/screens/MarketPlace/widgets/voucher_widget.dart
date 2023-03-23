@@ -36,7 +36,8 @@ Widget buildVoucherWidget() {
                         "Gói miễn phí vận chuyển Xtra Plus(Freeshipp Xtra Plus)",
                         false,
                         fontSize: 13),
-                    buildTextContent("₫${formatCurrency(10000000)}", true, fontSize: 14,colorWord: red),
+                    buildTextContent("₫${formatCurrency(10000000)}", true,
+                        fontSize: 14, colorWord: red),
                   ],
                 ),
               ),
@@ -61,7 +62,7 @@ Widget buildVoucherWidget() {
                   buildTextContent("Đơn hàng tối thiểu ₫0", false,
                       fontSize: 10, isCenterLeft: false),
                 ],
-              ), 
+              ),
               buildMarketButton(width: 50, height: 30, contents: [
                 buildTextContent("Lưu", false,
                     fontSize: 13, isCenterLeft: false),

@@ -7,15 +7,12 @@ Widget buildTextContentButton(String title, bool isBold,
     int? maxLines,
     TextOverflow? overflow,
     IconData? iconData,
-    Function? function
-    }) {
-  return
-   InkWell(
+    Function? function}) {
+  return InkWell(
     onTap: () {
       function != null ? function() : null;
     },
-    child: 
-    Container(
+    child: Container(
       alignment: isCenterLeft! ? Alignment.centerLeft : Alignment.center,
       child: Wrap(
         children: [

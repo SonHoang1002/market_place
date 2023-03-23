@@ -11,7 +11,6 @@ import 'package:market_place/providers/market_place_providers/cart_product_provi
 import 'package:market_place/providers/market_place_providers/detail_product_provider.dart';
 import 'package:market_place/providers/market_place_providers/interest_product_provider.dart';
 import 'package:market_place/providers/market_place_providers/review_product_provider.dart';
-import 'package:market_place/screens/MarketPlace/screen/buyer_orders/unsucess_transaction_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/preview_video_image.dart';
 import 'package:market_place/screens/MarketPlace/widgets/cart_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/circular_progress_indicator.dart';
@@ -380,10 +379,7 @@ class _DetailProductMarketPageComsumerState
                       width: 10,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        pushToNextScreen(
-                            context, const UnSuccessTransactionPage());
-                      },
+                      onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
                           color: _isScrolled
@@ -1018,9 +1014,12 @@ class _DetailProductMarketPageComsumerState
                   bgColor: _canAddToCart ? Colors.orange[500] : greyColor,
                   contents: [buildTextContent(title, false, fontSize: 13)],
                   function: () async {
-                    _updateAnimation();
-                    popToPreviousScreen(context);
-                    _canAddToCart ? _addToCart() : null;
+                    if (_canAddToCart) {
+                      _updateAnimation();
+                      popToPreviousScreen(context);
+                      _addToCart();
+                    }
+                    // _canAddToCart ? _addToCart() : null;
                   }),
             ),
           ],
@@ -1034,77 +1033,74 @@ class _DetailProductMarketPageComsumerState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  margin: const EdgeInsets.only(
-                    top: 7,
-                  ),
-                  width: 80,
-                  child: buildTextContent(title, true, fontSize: 18)),
-              Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: List.generate(data.length, (index) {
-                  return InkWell(
-                    onTap: () {
-                      if (title == "Màu sắc") {
-                        if (_colorCheckList.isNotEmpty) {
-                          for (int i = 0; i < _colorCheckList.length; i++) {
-                            _colorCheckList[i] = false;
-                          }
-                          _colorCheckList[index] = true;
-                          _colorValue = data[index];
+          Container(
+              margin: const EdgeInsets.only(
+                top: 7,
+              ),
+              width: 80,
+              child: buildTextContent(title, true, fontSize: 18)),
+          Expanded(
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: List.generate(data.length, (index) {
+                return InkWell(
+                  onTap: () {
+                    if (title == "Màu sắc") {
+                      if (_colorCheckList.isNotEmpty) {
+                        for (int i = 0; i < _colorCheckList.length; i++) {
+                          _colorCheckList[i] = false;
                         }
-                      } else {
-                        if (_sizeCheckList.isNotEmpty) {
-                          for (int i = 0; i < _sizeCheckList.length; i++) {
-                            _sizeCheckList[i] = false;
-                          }
-                          _sizeCheckList[index] = true;
-                          _sizeValue = data[index];
-                        }
+                        _colorCheckList[index] = true;
+                        _colorValue = data[index];
                       }
-                      setState(() {});
-                      _updateInformationCategorySelection();
-                      additionalFunction != null ? additionalFunction() : null;
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      width: 80,
-                      margin: const EdgeInsets.only(right: 10, top: 10),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: title == "Màu sắc"
-                                  ? _colorCheckList.isNotEmpty &&
-                                          _colorCheckList[index]
-                                      ? blueColor
-                                      : greyColor
-                                  : _sizeCheckList.isNotEmpty &&
-                                          _sizeCheckList[index]
-                                      ? blueColor
-                                      : greyColor,
-                              width: 0.6),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: buildTextContent(data[index], false,
-                          colorWord: title == "Màu sắc"
-                              ? _colorCheckList.isNotEmpty &&
-                                      _colorCheckList[index]
-                                  ? blueColor
-                                  : null
-                              : _sizeCheckList.isNotEmpty &&
-                                      _sizeCheckList[index]
-                                  ? blueColor
-                                  : null,
-                          fontSize: 14,
-                          isCenterLeft: false),
-                    ),
-                  );
-                }),
-              )
-            ],
+                    } else {
+                      if (_sizeCheckList.isNotEmpty) {
+                        for (int i = 0; i < _sizeCheckList.length; i++) {
+                          _sizeCheckList[i] = false;
+                        }
+                        _sizeCheckList[index] = true;
+                        _sizeValue = data[index];
+                      }
+                    }
+                    setState(() {});
+                    _updateInformationCategorySelection();
+                    additionalFunction != null ? additionalFunction() : null;
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    width: 80,
+                    margin: const EdgeInsets.only(right: 10, top: 10),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: title == "Màu sắc"
+                                ? _colorCheckList.isNotEmpty &&
+                                        _colorCheckList[index]
+                                    ? blueColor
+                                    : greyColor
+                                : _sizeCheckList.isNotEmpty &&
+                                        _sizeCheckList[index]
+                                    ? blueColor
+                                    : greyColor,
+                            width: 0.6),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: buildTextContent(data[index], false,
+                        colorWord: title == "Màu sắc"
+                            ? _colorCheckList.isNotEmpty &&
+                                    _colorCheckList[index]
+                                ? blueColor
+                                : null
+                            : _sizeCheckList.isNotEmpty && _sizeCheckList[index]
+                                ? blueColor
+                                : null,
+                        fontSize: 14,
+                        isCenterLeft: false),
+                  ),
+                );
+              }),
+            ),
           ),
         ],
       ),

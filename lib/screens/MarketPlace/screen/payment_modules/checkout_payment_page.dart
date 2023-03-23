@@ -6,6 +6,7 @@ import 'package:market_place/screens/MarketPlace/screen/buyer_orders/my_order_pa
 import 'package:market_place/screens/MarketPlace/screen/main_market_page.dart';
 import 'package:market_place/screens/MarketPlace/widgets/cart_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/classify_category_conponent.dart';
+import 'package:market_place/screens/MarketPlace/widgets/simple_button_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/voucher_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/spacer_widget.dart';
 import 'package:market_place/widgets/cross_bar.dart';
@@ -151,32 +152,14 @@ class _CheckoutPaymentPageState extends ConsumerState<CheckoutPaymentPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildSingleButton("Trang chủ", function: () {
+        buildSingleButton(context, "Trang chủ", function: () {
           pushAndReplaceToNextScreen(context, const MainMarketPage());
         }),
         buildSpacer(width: 10),
-        _buildSingleButton("Đơn mua", function: () {
+        buildSingleButton(context, "Đơn mua", function: () {
           pushAndReplaceToNextScreen(context, const MyOrderPage1());
         })
       ],
-    );
-  }
-
-  Widget _buildSingleButton(String title, {Function? function}) {
-    return GestureDetector(
-      onTap: () {
-        function != null ? function() : null;
-      },
-      child: Container(
-        width: width * 0.43,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          border: Border.all(color: greyColor, width: 0.4),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child:
-            buildTextContent(title, false, fontSize: 17, isCenterLeft: false),
-      ),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:market_place/widgets/GeneralWidget/divider_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/information_component_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/spacer_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/text_content_widget.dart';
+import 'package:market_place/widgets/map.dart';
 import 'package:market_place/widgets/messenger_app_bar/app_bar_title.dart';
 
 import '../../../../theme/colors.dart';
@@ -75,7 +76,7 @@ class _PrepareProductMarketPageState
               const AppBarTitle(text: "Chuẩn bị hàng"),
               GestureDetector(
                 onTap: () async {
-                  pushToNextScreen(context, NotificationMarketPage());
+                  pushToNextScreen(context, const NotificationMarketPage());
                 },
                 child: const Icon(
                   FontAwesomeIcons.bell,
@@ -118,101 +119,107 @@ class _PrepareProductMarketPageState
   }
 
   Widget _buildPrepareBody() {
-    return Column(
-      children: [
-        GeneralComponent(
-          [
-            buildTextContent("Lấy hàng", true, fontSize: 17),
-          ],
-          prefixWidget: const Flexible(
-            flex: 2,
-            child: Icon(
-              FontAwesomeIcons.cartPlus,
-              size: 18,
-            ),
-          ),
-          changeBackground: transparent,
-          isHaveBorder: false,
-          padding: EdgeInsets.zero,
-        ),
-        buildSpacer(height: 7),
-        GeneralComponent(
-          [
-            buildTextContent(
-                "Shoppe Express Instant sẽ đến lấy hàng theo địa chỉ lấy hàng mà bạn đã xác nhận",
-                false,
-                fontSize: 14),
-          ],
-          prefixWidget: const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: SizedBox(),
-          ),
-          suffixWidget: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Icon(
-                FontAwesomeIcons.check,
-                size: 18,
-                color: red,
-              ),
-              SizedBox()
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          GeneralComponent(
+            [
+              buildTextContent("Lấy hàng", true, fontSize: 17),
             ],
-          ),
-          changeBackground: transparent,
-          isHaveBorder: false,
-          padding: EdgeInsets.zero,
-        ),
-        GeneralComponent(
-          [
-            buildSpacer(height: 20),
-            buildTextContent("Địa chỉ lấy hàng", false, fontSize: 17),
-            buildSpacer(height: 10),
-            buildTextContent(address["name"], false, fontSize: 13),
-            buildSpacer(height: 7),
-            buildTextContent(address["phone_number"], false, fontSize: 13),
-            buildSpacer(height: 7),
-            buildTextContent(
-                address["detail_addresses"] + ", " + address["addresses"],
-                false,
-                fontSize: 13),
-            buildSpacer(height: 7),
-            buildDivider(color: greyColor),
-            buildSpacer(height: 7),
-            InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildTextContent(
-                    "Chọn vị trí",
-                    false,
-                  ),
-                  const Icon(
-                    FontAwesomeIcons.locationArrow,
-                    size: 20,
-                    color: red,
-                  ),
-                ],
+            prefixWidget: const Flexible(
+              flex: 2,
+              child: Icon(
+                FontAwesomeIcons.cartPlus,
+                size: 18,
               ),
-            )
-          ],
-          prefixWidget: const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: SizedBox(),
+            ),
+            changeBackground: transparent,
+            isHaveBorder: false,
+            padding: EdgeInsets.zero,
           ),
-          changeBackground: transparent,
-          isHaveBorder: false,
-          padding: EdgeInsets.zero,
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          height: 150,
-          width: width,
-          color: greyColor,
-          child: buildTextContent("Bản đồ ở đây", false,
-              isCenterLeft: false, fontSize: 12),
-        )
-      ],
+          buildSpacer(height: 7),
+          GeneralComponent(
+            [
+              buildTextContent(
+                  "Shoppe Express Instant sẽ đến lấy hàng theo địa chỉ lấy hàng mà bạn đã xác nhận",
+                  false,
+                  fontSize: 14),
+            ],
+            prefixWidget: const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: SizedBox(),
+            ),
+            suffixWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Icon(
+                  FontAwesomeIcons.check,
+                  size: 18,
+                  color: red,
+                ),
+                SizedBox()
+              ],
+            ),
+            changeBackground: transparent,
+            isHaveBorder: false,
+            padding: EdgeInsets.zero,
+          ),
+          GeneralComponent(
+            [
+              buildSpacer(height: 20),
+              buildTextContent("Địa chỉ lấy hàng", false, fontSize: 17),
+              buildSpacer(height: 10),
+              buildTextContent(address["name"], false, fontSize: 13),
+              buildSpacer(height: 7),
+              buildTextContent(address["phone_number"], false, fontSize: 13),
+              buildSpacer(height: 7),
+              buildTextContent(
+                  address["detail_addresses"] + ", " + address["addresses"],
+                  false,
+                  fontSize: 13),
+              buildSpacer(height: 7),
+              buildDivider(color: greyColor),
+              buildSpacer(height: 7),
+              InkWell(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildTextContent(
+                      "Chọn vị trí",
+                      false,
+                    ),
+                    const Icon(
+                      FontAwesomeIcons.locationArrow,
+                      size: 20,
+                      color: red,
+                    ),
+                  ],
+                ),
+              )
+            ],
+            prefixWidget: const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: SizedBox(),
+            ),
+            changeBackground: transparent,
+            isHaveBorder: false,
+            padding: EdgeInsets.zero,
+          ),
+          Container(
+              margin: const EdgeInsets.only(top: 10),
+              height: 500,
+              width: width,
+              color: greyColor,
+              child: MapWidget(
+                checkin: address,
+              )),
+          Container(
+            height: 300,
+            width: width,
+          )
+        ],
+      ),
     );
   }
 }
