@@ -8,7 +8,6 @@ import 'package:market_place/providers/market_place_providers/cart_product_provi
 import 'package:market_place/providers/market_place_providers/discover_product_provider.dart';
 import 'package:market_place/providers/market_place_providers/product_categories_provider.dart';
 import 'package:market_place/providers/market_place_providers/products_provider.dart';
-import 'package:market_place/screens/MarketPlace/screen/buyer_orders/my_order_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/buyer_orders/my_order_page_1.dart';
 import 'package:market_place/screens/MarketPlace/screen/create_product_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/filter_categories_page.dart';
@@ -34,7 +33,6 @@ import 'package:market_place/widgets/cross_bar.dart';
 
 import '../../../../constant/marketPlace_constants.dart';
 import '../../../../theme/colors.dart';
-import '../../../providers/market_place_providers/interest_product_provider.dart';
 import '../widgets/product_item_widget.dart';
 import 'search_modules/category_search_page.dart';
 

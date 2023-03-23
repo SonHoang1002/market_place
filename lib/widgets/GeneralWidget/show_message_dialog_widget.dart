@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:market_place/helpers/routes.dart';
 import 'package:market_place/screens/MarketPlace/widgets/market_button_widget.dart';
@@ -35,3 +36,32 @@ buildMessageDialog(BuildContext context, String title,
         );
       });
 }
+
+// Widget buildMessageDialog(BuildContext context, String title,
+//     {Function? oKFunction, dynamic textAction, bool? oneButton = false}) {
+//   return CupertinoAlertDialog(
+//     title: Text(title),
+//     // content: Text(content),
+//     actions: [
+//       !oneButton!
+//           ? CupertinoDialogAction(
+//               isDefaultAction: true,
+//               onPressed: () {
+//                 Navigator.pop(context);
+//               },
+//               child: const Text('Huỷ', style: TextStyle(color: primaryColor)),
+//             )
+//           : SizedBox(),
+//       CupertinoDialogAction(
+//         isDestructiveAction: true,
+//         onPressed: () {
+//           oKFunction == null ? popToPreviousScreen(context) : oKFunction();
+//         },
+//         child: Text(
+//           textAction ?? 'Đồng ý',
+//           style: const TextStyle(color: primaryColor),
+//         ),
+//       ),
+//     ],
+//   );
+// }

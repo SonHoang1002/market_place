@@ -6,6 +6,7 @@ import 'package:market_place/constant/marketPlace_constants.dart';
 import 'package:market_place/helpers/routes.dart';
 import 'package:market_place/providers/market_place_providers/page_list_provider.dart';
 import 'package:market_place/providers/market_place_providers/products_provider.dart';
+import 'package:market_place/screens/MarketPlace/screen/update_market_place.dart';
 import 'package:market_place/screens/MarketPlace/widgets/circular_progress_indicator.dart';
 import 'package:market_place/screens/MarketPlace/widgets/market_button_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/rating_star_widget.dart';
@@ -26,7 +27,6 @@ import 'package:market_place/widgets/image_cache.dart';
 import 'package:market_place/widgets/messenger_app_bar/app_bar_title.dart';
 import 'package:market_place/widgets/video_render_player.dart';
 import '../../../../theme/colors.dart';
-import 'update_market_place.dart';
 import 'notification_market_page.dart';
 
 class ManageProductMarketPage extends ConsumerStatefulWidget {
@@ -487,7 +487,9 @@ class _ManageProductMarketPageState
                   padding: const EdgeInsets.fromLTRB(7, 0, 7, 0),
                   child: _buildActionButtonWidget(
                       buildTextContent("Sửa", false, isCenterLeft: false),
-                      function: () {}),
+                      function: () {
+                    pushToNextScreen(context, UpdateMarketPage(data["id"]));
+                  }),
                 )),
             Flexible(
                 flex: 2,

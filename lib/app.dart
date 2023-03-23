@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:market_place/providers/meProvider.dart';
 import 'package:market_place/screens/Auth/storage.dart';
@@ -9,7 +8,6 @@ import 'services/notifications/local_notification.dart';
 
 var routes = <String, WidgetBuilder>{
   "/": (BuildContext context) => const MainMarketPage(),
- 
 };
 
 class App extends StatefulWidget {
@@ -60,7 +58,6 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
   String? initialMessage;
   bool _resolved = false;
   late final LocalNotificationService service;
-
 
   @override
   Widget build(BuildContext context) {

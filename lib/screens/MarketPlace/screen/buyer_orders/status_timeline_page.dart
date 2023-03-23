@@ -11,24 +11,22 @@ import 'package:market_place/widgets/cross_bar.dart';
 import 'package:market_place/helpers/routes.dart';
 import 'package:market_place/widgets/GeneralWidget/text_content_widget.dart';
 import 'package:market_place/widgets/image_cache.dart';
-// import 'package:timelines/timelines.dart';
-// import 'package:timelines/timelines.dart';
 
 import '../../../../theme/colors.dart';
 
-class UnSuccessTransactionPage extends ConsumerStatefulWidget {
-  const UnSuccessTransactionPage({super.key});
+class StatusOrderTimelinePage extends ConsumerStatefulWidget {
+  const StatusOrderTimelinePage({super.key});
 
   @override
-  ConsumerState<UnSuccessTransactionPage> createState() =>
-      _UnSuccessTransactionPageState();
+  ConsumerState<StatusOrderTimelinePage> createState() =>
+      _StatusOrderTimelinePageState();
 }
 
-class _UnSuccessTransactionPageState
-    extends ConsumerState<UnSuccessTransactionPage> {
+class _StatusOrderTimelinePageState
+    extends ConsumerState<StatusOrderTimelinePage> {
   late double width = 0;
   late double height = 0;
-
+  bool _isHaveTranferCode = false;
   Future _initData() async {
     setState(() {});
   }
@@ -51,7 +49,7 @@ class _UnSuccessTransactionPageState
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: GeneralComponent(
                       [
-                        buildTextContent("Giao hàng không thành công", true,
+                        buildTextContent("xncbmnbc", true,
                             fontSize: 18, colorWord: red)
                       ],
                       prefixWidget: GestureDetector(
@@ -126,58 +124,154 @@ class _UnSuccessTransactionPageState
                   const CrossBar(
                     height: 5,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        buildTextContent("Mã vận đơn", false,
-                            fontSize: 15, colorWord: greyColor),
-                        Row(
+                  // neu co ma van don thi hien timeline
+                  _isHaveTranferCode
+                      ? Column(
                           children: [
-                            buildTextContent("SKJHFKJHFKFKF", true,
-                                fontSize: 15),
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 7),
-                              height: 30,
-                              width: 1,
-                              color: greyColor,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  buildTextContent("Mã vận đơn", false,
+                                      fontSize: 15, colorWord: greyColor),
+                                  Row(
+                                    children: [
+                                      buildTextContent("SKJHFKJHFKFKF", true,
+                                          fontSize: 15),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 7),
+                                        height: 30,
+                                        width: 1,
+                                        color: greyColor,
+                                      ),
+                                      buildTextContentButton("SAO CHÉP", false,
+                                          fontSize: 15,
+                                          colorWord: Colors.green,
+                                          function: () {}),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            buildTextContentButton("SAO CHÉP", false,
-                                fontSize: 15,
-                                colorWord: Colors.green,
-                                function: () {}),
+                            buildSpacer(height: 7),
+                            buildDivider(height: 5, color: greyColor),
+                            buildSpacer(height: 10),
+                            Timeline(
+                                indicators:
+                                    List.generate(demoDelvered.length, (index) {
+                                  if (index == 0) {
+                                    return const Icon(Icons.access_alarm,
+                                        size: 24);
+                                  }
+                                  return const Icon(
+                                    FontAwesomeIcons.dotCircle,
+                                    color: greyColor,
+                                    size: 12,
+                                  );
+                                }).toList(),
+                                children:
+                                    List.generate(demoDelvered.length, (index) {
+                                  return _buildContent(
+                                      demoDelvered[index]["day"],
+                                      demoDelvered[index]["time"],
+                                      demoDelvered[index]["title"],
+                                      demoDelvered[index]["content"],
+                                      titleColor: index == 0 ? red : greyColor);
+                                }).toList()),
                           ],
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: GeneralComponent(
+                            [
+                              buildTextContent("Đơn đã đặt", true,
+                                  fontSize: 17, colorWord: Colors.green),
+                              buildSpacer(height: 5),
+                              buildTextContent("Đơn hàng đã được đặt", false,
+                                  fontSize: 15, colorWord: Colors.green),
+                            ],
+                            preffixFlexValue: 5,
+                            prefixWidget: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    buildTextContent(
+                                      "Hôm nay",
+                                      false,
+                                      fontSize: 13,
+                                    ),
+                                    buildSpacer(height: 5),
+                                    buildTextContent(
+                                      "18:17",
+                                      false,
+                                      fontSize: 13,
+                                    )
+                                  ],
+                                ),
+                                buildSpacer(width: 5),
+                                Container(
+                                  width: 1,
+                                  height: 40,
+                                  color: greyColor,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(18),
+                                      color: greyColor[300]),
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Icon(
+                                    FontAwesomeIcons.bagShopping,
+                                    size: 13,
+                                    color: Colors.green,
+                                  ),
+                                )
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            changeBackground:
+                                Theme.of(context).colorScheme.background,
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                  buildSpacer(height: 7),
-                  buildDivider(height: 5, color: greyColor),
-                  buildSpacer(height: 10),
-                  Timeline(
-                      indicators: List.generate(demoDelvered.length, (index) {
-                        if (index == 0) {
-                          return const Icon(Icons.access_alarm, size: 24);
-                        }
-                        return const Icon(
-                          FontAwesomeIcons.dotCircle,
-                          color: greyColor,
-                          size: 12,
-                        );
-                      }).toList(),
-                      children: List.generate(demoDelvered.length, (index) {
-                        return _buildContent(
-                            demoDelvered[index]["day"],
-                            demoDelvered[index]["time"],
-                            demoDelvered[index]["title"],
-                            demoDelvered[index]["content"],
-                            titleColor: index == 0 ? red : greyColor);
-                      }).toList()),
                 ],
               )),
         ));
   }
+// List<String> _getStatusOrder() {
+//     String paidTitle = '';
+//     String statusTitle = '';
+//     if (_mainData["payment_status"] == "paid") {
+//       paidTitle = "Đã thanh toán";
+//     } else {
+//       paidTitle = "Chưa thanh toán";
+//     }
+//     switch (_mainData["status"]) {
+//       case "pending":
+//         statusTitle = "Đơn hàng đang chờ xử lý";
+//         break;
+//       case "delivered":
+//         statusTitle = "Đơn hàng đang vận chuyển";
+//         break;
+//       case "shipping":
+//         statusTitle = "Đon hàng đang giao";
+//         break;
+//       case "finish":
+//         statusTitle = "Đơn hàng thành công";
+//         break;
+//       case "cancelled":
+//         statusTitle = "Đơn hàng đã bị hủy";
+//         break;
+//       case "return":
+//         statusTitle = "Đơn hàng bị trả lại";
+//         break;
+//     }
+//     return [statusTitle, paidTitle];
+//   }
 
   Widget _buildContent(String day, String time, String title, String content,
       {Color titleColor = greyColor}) {
