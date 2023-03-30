@@ -33,8 +33,11 @@ class EmsoCoinPage extends StatelessWidget {
                 child: Container(
               margin: const EdgeInsets.only(top: 30),
               child: buildTextContentButton(
-                  "Nạp lần đầu để nhận ngay 10 tỷ Ecoin chơi chứng khoán", true,
-                  fontSize: 19, isCenterLeft: false, function: () {}),
+                  "Nạp lần đầu để nhận ngay 10 tỷ Ecoin  mua sắm dịp lễ sắp tới",
+                  true,
+                  fontSize: 19,
+                  isCenterLeft: false,
+                  function: () {}),
             )),
           ],
         ));

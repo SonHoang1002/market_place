@@ -31,7 +31,7 @@ class EmsoPayPage extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(top: 30),
             child: buildTextContentButton(
-                "Nạp tiền vào ví để có thể trở thành BillGate của Việt Nam",
+                "Nạp tiền vào ví để có thể trở thành thành viên uy tín của Emso Việt Nam",
                 true,
                 fontSize: 19,
                 isCenterLeft: false,

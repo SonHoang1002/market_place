@@ -22,6 +22,7 @@ import 'package:market_place/screens/MarketPlace/screen/seller_orders/manage_ord
 import 'package:market_place/screens/MarketPlace/widgets/banner_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/cart_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/category_product_item.dart';
+import 'package:market_place/screens/MarketPlace/widgets/custom_skeleton.dart';
 import 'package:market_place/screens/MarketPlace/widgets/title_and_see_all.dart';
 import 'package:market_place/widgets/GeneralWidget/divider_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/information_component_widget.dart';
@@ -93,11 +94,6 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
         });
       }
     });
-    // _scrollController1.addListener(() {
-    //   setState(() {
-    //     _appBarOpacity = (_scrollController1.offset / 250).toDouble();
-    //   });
-    // });
   }
 
   @override
@@ -265,12 +261,14 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
             Column(
               children: [
                 Container(
-                  height: 35,
+                  height: height > 734 ? 10 : 40,
                   color: _isScrolled
                       ? Theme.of(context).scaffoldBackgroundColor
                       : transparent,
                 ),
-                _customAppBar(),
+                height > 734
+                    ? SafeArea(child: _customAppBar())
+                    : _customAppBar(),
               ],
             ),
           ],
@@ -292,9 +290,7 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
           Flexible(
             flex: 2,
             child: GestureDetector(
-              onTap: () {
-                //
-              },
+              onTap: () {},
               child: Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(left: 9, right: 10),
@@ -646,7 +642,7 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
                           return SizedBox(
                               width: width * 0.4,
                               height: 200,
-                              child: CardSkeleton());
+                              child: buildCustomSkeleton(context));
                         }),
               );
             }),
@@ -694,7 +690,7 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
                         return SizedBox(
                             width: width * 0.4,
                             height: 200,
-                            child: CardSkeleton());
+                            child: buildCustomSkeleton(context));
                       });
             }),
       ],

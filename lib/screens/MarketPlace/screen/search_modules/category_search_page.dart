@@ -9,6 +9,7 @@ import 'package:market_place/screens/MarketPlace/widgets/banner_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/cart_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/category_product_item.dart';
 import 'package:market_place/screens/MarketPlace/widgets/classify_category_conponent.dart';
+import 'package:market_place/screens/MarketPlace/widgets/custom_skeleton.dart';
 import 'package:market_place/screens/MarketPlace/widgets/product_item_widget.dart';
 import 'package:market_place/apis/market_place_apis/search_product_api.dart';
 import 'package:market_place/screens/MarketPlace/widgets/title_and_see_all.dart';
@@ -242,7 +243,9 @@ class _CategorySearchPageState extends ConsumerState<CategorySearchPage> {
         itemCount: 1,
         itemBuilder: (context, index) {
           return SizedBox(
-              width: width * 0.4, height: 200, child: CardSkeleton());
+              width: width * 0.4,
+              height: 200,
+              child: buildCustomSkeleton(context));
         });
   }
 }
