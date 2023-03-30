@@ -3,14 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_skeleton/loader_skeleton.dart';
 import 'package:market_place/apis/market_place_apis/category_product_apis.dart';
-
-import 'package:market_place/data/market_datas/list_category.dart';
 import 'package:market_place/providers/market_place_providers/products_provider.dart';
 import 'package:market_place/screens/MarketPlace/screen/see_more_page.dart';
 import 'package:market_place/screens/MarketPlace/widgets/banner_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/cart_widget.dart';
 import 'package:market_place/screens/MarketPlace/widgets/category_product_item.dart';
 import 'package:market_place/screens/MarketPlace/widgets/classify_category_conponent.dart';
+import 'package:market_place/screens/MarketPlace/widgets/custom_skeleton.dart';
 import 'package:market_place/screens/MarketPlace/widgets/product_item_widget.dart';
 import 'package:market_place/apis/market_place_apis/search_product_api.dart';
 import 'package:market_place/screens/MarketPlace/widgets/title_and_see_all.dart';
@@ -194,7 +193,6 @@ class _CategorySearchPageState extends ConsumerState<CategorySearchPage> {
     await _initFilterCategory();
     await _initChildCategory();
     await _initSuggest();
-    setState(() {});
   }
 
   Future _initFilterCategory() async {
@@ -210,12 +208,14 @@ class _CategorySearchPageState extends ConsumerState<CategorySearchPage> {
         "limit": 10,
       });
       _filteredProductList = response;
+      setState(() {});
     }
   }
 
   Future _initChildCategory() async {
     if (_childCategoryList == null) {
       _childCategoryList = await _getChildCategoryList(widget.id);
+      setState(() {});
     }
   }
 
@@ -232,6 +232,7 @@ class _CategorySearchPageState extends ConsumerState<CategorySearchPage> {
     }
     if (suggestList == null || suggestList!.isEmpty) {
       suggestList = ref.watch(productsProvider).list;
+      setState(() {});
     }
   }
 
@@ -242,7 +243,9 @@ class _CategorySearchPageState extends ConsumerState<CategorySearchPage> {
         itemCount: 1,
         itemBuilder: (context, index) {
           return SizedBox(
-              width: width * 0.4, height: 200, child: CardSkeleton());
+              width: width * 0.4,
+              height: 200,
+              child: buildCustomSkeleton(context));
         });
   }
 }

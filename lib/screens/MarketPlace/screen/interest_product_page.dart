@@ -5,7 +5,6 @@ import 'package:market_place/apis/market_place_apis/follwer_product_api.dart';
 import 'package:market_place/constant/get_min_max_price.dart';
 import 'package:market_place/constant/marketPlace_constants.dart';
 import 'package:market_place/helpers/routes.dart';
-import 'package:market_place/providers/market_place_providers/interest_product_provider.dart';
 import 'package:market_place/screens/MarketPlace/screen/detail_product_page.dart';
 import 'package:market_place/screens/MarketPlace/widgets/circular_progress_indicator.dart';
 import 'package:market_place/screens/MarketPlace/widgets/market_button_widget.dart';

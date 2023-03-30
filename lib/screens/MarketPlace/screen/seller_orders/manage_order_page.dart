@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_place/constant/marketPlace_constants.dart';
@@ -762,9 +762,7 @@ class _OrderProductMarketPageState
   Widget _gotOrder(dynamic data) {
     return buildMarketButton(
         width: width * 0.4,
-        contents:[
-          buildTextContent("Đã nhận hàng", false,fontSize: 13)
-        ] ,
+        contents: [buildTextContent("Đã nhận hàng", false, fontSize: 13)],
         bgColor: blueColor,
         function: () async {
           setState(() {
@@ -843,8 +841,7 @@ Widget _buildBetweenContent(String title, String contents,
         const SizedBox(
           width: 30,
         ),
-        Expanded(
-          // flex: 10,
+        Expanded( 
           child: Wrap(
             alignment: WrapAlignment.end,
             children: [

@@ -30,7 +30,7 @@ class _CustomBannerState extends State<CustomBanner> {
   void initState() {
     if (mounted) return;
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+    _timer ??= Timer.periodic(const Duration(seconds: 2), (Timer timer) {
       if (_currentPage < images.length - 1) {
         setState(() {
           _currentPage++;

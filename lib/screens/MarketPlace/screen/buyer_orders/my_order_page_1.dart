@@ -5,7 +5,7 @@ import 'package:market_place/constant/marketPlace_constants.dart';
 import 'package:market_place/helpers/format_currency.dart';
 import 'package:market_place/helpers/routes.dart';
 import 'package:market_place/providers/market_place_providers/order_product_provider.dart';
-import 'package:market_place/screens/MarketPlace/screen/buyer_orders/success_order._page.dart';
+import 'package:market_place/screens/MarketPlace/screen/buyer_orders/detail_order_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/notification_market_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/review_product_page.dart';
 import 'package:market_place/screens/MarketPlace/screen/see_review_market.dart';
@@ -111,49 +111,9 @@ class _MyOrderPage1State extends ConsumerState<MyOrderPage1> {
       _returnList = formatDataList(_returnList!);
     }
 
-    // _unpaidList = formatDataList(_unpaidList!);
-    // _deliveredList = formatDataList(_deliveredList!);
-    // _shippingList = formatDataList(_shippingList!);
-    // _finishList = formatDataList(_finishList!);
-    // _canceledList = formatDataList(_canceledList!);
-    // _returnList = formatDataList(_returnList!);
-
-    // if (_orderData == null) {
-    //   // _orderData = ref.watch(orderBuyerProvider).buyerOrder;
-    //   _orderData = await OrderApis().getBuySellerOrderApi();
-    //   _filteredOrderData =
-    //       OrderProductMarketConstant.ORDER_PRODUCT_MARKET_TAB_LIST.map(
-    //     (e) {
-    //       return {
-    //         "key": e["key"],
-    //         "open": null,
-    //         "title": e["title"],
-    //         "data": []
-    //       };
-    //     },
-    //   ).toList();
-    //   _orderData?.forEach((_orderDataElement) {
-    //     dynamic openOrderDataElement = _orderDataElement;
-    //     openOrderDataElement["open"] =
-    //         _orderDataElement["order_items"].length > 1 ? false : null;
-    //     for (dynamic _filteredOrderDataElement in _filteredOrderData!) {
-    //       if (_filteredOrderDataElement["key"] == _orderDataElement["status"]) {
-    //         _filteredOrderData![_filteredOrderData!
-    //                 .indexOf(_filteredOrderDataElement)]['data']
-    //             .add(openOrderDataElement);
-    //       }
-    //     }
-    //   });
-    // }
     setState(() {
       _isLoading = false;
     });
-    print(_unpaidList!.length);
-    print(_deliveredList!.length);
-    print(_shippingList!.length);
-    print(_finishList!.length);
-    print(_canceledList!.length);
-    print(_returnList!.length);
     return 0;
   }
 
@@ -295,8 +255,12 @@ class _MyOrderPage1State extends ConsumerState<MyOrderPage1> {
   }
 
   Widget _buildFinishBody() {
-    return _buildBaseBody(_buildOrderComponent(_finishList!, function: () {
-      pushToNextScreen(context, const SuccessOrderPage());
+    return _buildBaseBody(_buildOrderComponent(_finishList!, function: (data) {
+      // pushToNextScreen(
+      //     context,
+      //     DetailOrderPage(
+      //       data: data,
+      //     ));
     }));
   }
 
@@ -558,29 +522,29 @@ class _MyOrderPage1State extends ConsumerState<MyOrderPage1> {
       case "pending":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["pending_count"].toString() ?? "0";
+            : _orderTabCount!["pending_count"] ?? 0;
       case "delivered":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["delivered_count"].toString() ?? "0";
+            : _orderTabCount!["delivered_count"] ?? 0;
       case "shipping":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["shipping_count"].toString() ?? "0";
+            : _orderTabCount!["shipping_count"] ?? 0;
       case "finish":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["finish_count"].toString() ?? "0";
+            : _orderTabCount!["finish_count"] ?? 0;
       case "cancelled":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["cancelled_count"].toString() ?? "0";
+            : _orderTabCount!["cancelled_count"] ?? 0;
       case "return":
         return _orderTabCount == null
             ? "0"
-            : _orderTabCount!["return_count"].toString();
+            : _orderTabCount!["return_count"] ?? 0;
       default:
-        return "0";
+        return 0;
     }
   }
 
@@ -643,7 +607,8 @@ class _MyOrderPage1State extends ConsumerState<MyOrderPage1> {
   }
 // general
 
-  Widget _buildOrderComponent(List<dynamic> dataList, {Function? function}) {
+  Widget _buildOrderComponent(List<dynamic> dataList,
+      {void Function(dynamic data)? function}) {
     return dataList.isNotEmpty
         ? Column(
             children: List.generate(dataList.length, (index) {
@@ -652,7 +617,11 @@ class _MyOrderPage1State extends ConsumerState<MyOrderPage1> {
               children: [
                 InkWell(
                   onTap: () {
-                    function == null ? _showDetailDialog(data) : function();
+                    pushToNextScreen(
+                        context,
+                        DetailOrderPage(
+                          data: data,
+                        ));
                   },
                   child: Column(children: [
                     index != 0 ? buildSpacer(height: 5) : const SizedBox(),
