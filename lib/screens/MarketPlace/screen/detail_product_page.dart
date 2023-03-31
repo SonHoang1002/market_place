@@ -39,6 +39,7 @@ const String share_on_personal_page_of_friend =
 String imageUrl =
     "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/ype8x0zkqbv239asgx9p/V%C3%A9%20V%C3%A0o%20C%E1%BB%95ng%20IMG%20Worlds%20of%20Adventure,%20Dubai%20.jpg";
 
+// ignore: must_be_immutable
 class DetailProductMarketPage extends ConsumerStatefulWidget {
   dynamic simpleData;
   final dynamic id;
@@ -976,7 +977,7 @@ class _DetailProductMarketPageComsumerState
                                       Border.all(color: greyColor, width: 0.2)),
                               height: 30,
                               width: 30,
-                              child: buildTextContent("${productNumber}", true,
+                              child: buildTextContent("$productNumber", true,
                                   isCenterLeft: false),
                             ),
                             InkWell(
