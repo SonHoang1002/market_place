@@ -679,7 +679,7 @@ class _OrderProductMarketPageState
         width: width * 0.4,
         contents: [buildTextContent("Chuẩn bị hàng", false, fontSize: 13)],
         function: () {
-          pushToNextScreen(context, PrepareProductMarketPage());
+          pushToNextScreen(context, const PrepareProductMarketPage());
         });
   }
 

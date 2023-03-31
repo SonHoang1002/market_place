@@ -6,7 +6,7 @@ import 'package:market_place/widgets/GeneralWidget/spacer_widget.dart';
 import 'package:market_place/widgets/GeneralWidget/text_content_widget.dart';
 import 'package:market_place/widgets/image_cache.dart';
 
-Widget buildVoucherWidget() {
+Widget buildImageVoucherWidget() {
   return Container(
     padding: const EdgeInsets.all(10),
     decoration: BoxDecoration(
@@ -69,6 +69,45 @@ Widget buildVoucherWidget() {
               ])
             ],
           ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget buildNonImageVoucherWidget(
+    dynamic mainTitle, dynamic condition, dynamic useTime,
+    {double width = 350}) {
+  return Container(
+    width: width,
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+        border: Border.all(color: greyColor, width: 0.4),
+        borderRadius: BorderRadius.circular(4),
+        color: red.withOpacity(0.15)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildTextContent(mainTitle.toString(), true,
+                fontSize: 17, colorWord: red),
+            buildSpacer(height: 7),
+            buildTextContent(condition.toString(), false,
+                fontSize: 12, maxLines: 2),
+            buildSpacer(height: 7),
+            buildTextContent('HSD: $useTime', false,
+                fontSize: 13, colorWord: greyColor),
+          ],
+        )),
+        Container(
+          child: buildMarketButton(width: 50, height: 30, contents: [
+            buildTextContent("Lưu", false, fontSize: 13, isCenterLeft: false),
+          ]),
         )
       ],
     ),

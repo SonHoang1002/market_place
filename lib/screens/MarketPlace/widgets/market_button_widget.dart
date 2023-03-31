@@ -23,6 +23,7 @@ Widget buildMarketButton(
       function != null ? function() : null;
     },
     child: Container(
+      height: height,
       decoration: isHaveBoder!
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(radiusValue ?? 5),
