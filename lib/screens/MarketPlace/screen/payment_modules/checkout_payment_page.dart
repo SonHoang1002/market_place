@@ -89,7 +89,7 @@ class _CheckoutPaymentPageState extends ConsumerState<CheckoutPaymentPage> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
               ),
-              child: buildVoucherWidget(),
+              child: buildImageVoucherWidget(),
             ),
             buildSpacer(height: 10),
             const CrossBar(

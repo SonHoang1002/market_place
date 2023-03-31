@@ -261,14 +261,12 @@ class _MainMarketPageState extends ConsumerState<MainMarketPage> {
             Column(
               children: [
                 Container(
-                  height: height > 734 ? 10 : 40,
+                  height: height > 734 ? 60 : 40,
                   color: _isScrolled
                       ? Theme.of(context).scaffoldBackgroundColor
                       : transparent,
                 ),
-                height > 734
-                    ? SafeArea(child: _customAppBar())
-                    : _customAppBar(),
+                _customAppBar()
               ],
             ),
           ],

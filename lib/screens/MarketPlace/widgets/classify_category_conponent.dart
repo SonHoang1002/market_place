@@ -17,6 +17,7 @@ Widget buildClassifyCategoryComponent(
           padding: const EdgeInsets.only(top: 10),
           scrollDirection: axis!,
           child: GridView.builder(
+              scrollDirection: axis,
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -34,6 +35,36 @@ Widget buildClassifyCategoryComponent(
                 return buildProductItem(
                     context: context, data: contentList[index]);
               }))
+    ],
+  );
+}
+
+Widget buildHorizontalClassifyCategoryComponent(
+    {required BuildContext context,
+    required Widget title,
+    required List<dynamic> contentList,
+    Function? titleFunction,
+    Axis? axis = Axis.vertical}) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+
+  return Column(
+    children: [
+      title,
+      SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(top: 10),
+          child: Row(
+              children: List.generate(contentList.length, (index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: InkWell(
+                onTap: () {},
+                child: buildProductItem(
+                    context: context, data: contentList[index]),
+              ),
+            );
+          })))
     ],
   );
 }

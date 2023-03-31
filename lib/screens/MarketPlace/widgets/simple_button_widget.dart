@@ -15,7 +15,7 @@ Widget buildSingleButton(BuildContext context, String title,
         border: Border.all(color: greyColor, width: 0.4),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: buildTextContent(title, false, fontSize: 17, isCenterLeft: false),
+      child: buildTextContent(title, false, fontSize: 13, isCenterLeft: false),
     ),
   );
 }

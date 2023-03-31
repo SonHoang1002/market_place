@@ -199,12 +199,12 @@ class _SearchMarketPageState extends ConsumerState<SearchMarketPage> {
                           return Column(children: [
                             _buildSearchItem(_historyProductList.isNotEmpty &&
                                     _historyProductList[index]
-                                            ["search_params"] !=
+                                            ["keyword"] !=
                                         null
                                 ? _historyProductList[index]
                                 : {
                                     "id": null,
-                                    "search_params": "Không có dữ liệu"
+                                    "keyword": "Không có dữ liệu"
                                   }),
                             buildDivider(color: greyColor, height: 10),
                             !_isExpand && index == 2
@@ -310,11 +310,10 @@ class _SearchMarketPageState extends ConsumerState<SearchMarketPage> {
                   height: 30,
                   width: 30,
                   padding: const EdgeInsets.all(5),
-                  child: data["product_image_attachments"] != null &&
-                          data["product_image_attachments"].isNotEmpty
+                  child: data["image_url"] != null &&
+                          data["image_url"].isNotEmpty
                       ? ImageCacheRender(
-                          path: data["product_image_attachments"][0]
-                              ["attachment"]["url"])
+                          path: data["image_url"] )
                       : const Icon(
                           FontAwesomeIcons.clock,
                           size: 18,
@@ -323,7 +322,7 @@ class _SearchMarketPageState extends ConsumerState<SearchMarketPage> {
                 SizedBox(
                   width: isHaveClose ? width * 0.69 : width * 0.79,
                   child: buildTextContent(
-                    "${data["title"] ?? data["search_params"]} ",
+                    "${data["title"] ?? data["keyword"]} ",
                     false,
                     fontSize: 17,
                     overflow: TextOverflow.ellipsis,
